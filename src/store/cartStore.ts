@@ -7,10 +7,12 @@ export const useCartStore = defineStore('cart', {
       [...JSON.parse(localStorage.getItem('marketCart') as string)] :
       [] as IProductCart[]
   }),
+
   actions: {
     setProductsToLS() {
       localStorage.setItem('marketCart', JSON.stringify(this.products))
     },
+
     addProduct(product: IProductCart) {
       if (this.products.filter(el => el.article == product.article).length == 0) {
         product.count = 1
