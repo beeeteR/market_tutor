@@ -38,5 +38,5 @@ export const useCartStore = defineStore('cart', {
       })
       this.setProductsToLS()
     }
-  }
+  },
 })
