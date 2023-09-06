@@ -4,11 +4,16 @@
       @input="$emit('filter', { name: 'title', value: title })" v-model="title" />
 
     <div class="catalog-filter__item--categories d-flex gap-2">
-      <button class="catalog-filter__item --category btn btn-outline-secondary" v-for="(category, idx) in categories" :key="idx"
-        @click="$emit('filter', { name: 'category', value: category })">
+      <button class="catalog-filter__item --category btn"
+              :class="currentFilterCategory != category ? 'btn-outline-secondary' : 'btn-secondary'"
+              v-for="(category, idx) in categories"
+              :key="idx"
+              @click="$emit('filter', { name: 'category', value: category })">
         {{ category }}
-    </button>
-      <button class="catalog-filter__item --category btn btn-outline-secondary" @click="$emit('filter', { name: 'category', value: '' })">
+      </button>
+      <button class="catalog-filter__item --category btn"
+              :class="currentFilterCategory != '' ? 'btn-outline-secondary' : 'btn-secondary'"
+              @click="$emit('filter', { name: 'category', value: '' })">
         Все
       </button>
     </div>
@@ -20,7 +25,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { defineEmits, onMounted, ref, watch } from 'vue';
+import { computed, ComputedRef, defineEmits, onMounted, ref, watch } from 'vue';
 import { useProductStore } from '@/store/catalogStore';
 import router from '@/router';
 
@@ -60,6 +65,9 @@ onMounted(() => {
   emit('filter', { name: 'category', value: initialCategory })
   emit('filter', { name: 'title', value: initialTitle })
 })
+
+const currentFilterCategory: ComputedRef<string> = computed((): string => router.currentRoute.value.query.category as string || '')
+
 </script>
 
 <style lang="scss">
