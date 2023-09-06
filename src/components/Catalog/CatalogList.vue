@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-list">
-    <catalog-item v-for="product in products" 
-    :data="product" 
+    <catalog-item v-for="product in products"
+    :data="product"
     :key="product.article" />
   </div>
 </template>
@@ -18,3 +18,12 @@ const props = defineProps({
   }
 })
 </script>
+
+<style lang="scss">
+.catalog-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+</style>

@@ -12,7 +12,6 @@ export const useCartStore = defineStore('cart', {
     setProductsToLS() {
       localStorage.setItem('marketCart', JSON.stringify(this.products))
     },
-
     addProduct(product: IProductCart) {
       if (this.products.filter(el => el.article == product.article).length == 0) {
         product.count = 1
@@ -39,6 +38,14 @@ export const useCartStore = defineStore('cart', {
         }
       })
       this.setProductsToLS()
+    },
+    getProductByArticle(article: string) {
+      const product = this.products.filter(item => {
+        if (item.article == article) {
+          return item
+        }
+      })
+      return product.length > 0 ? product[0] : null
     }
   },
 })

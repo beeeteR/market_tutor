@@ -1,5 +1,7 @@
 <template>
-  <catalog-list :products="cartStore.products"></catalog-list>
+  <h1 v-if="cartStore.products.length == 0"
+      class="mt-4 text-center align-self-center">Корзина пуста</h1>
+  <catalog-list v-else :products="cartStore.products"></catalog-list>
 </template>
 
 <script lang="ts" setup>
